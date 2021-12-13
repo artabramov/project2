@@ -1,0 +1,12 @@
+version: '3.2'
+services:
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+    - "8081:80"
+    environment:
+    - NGINX_HOST=localhost
+    - NGINX_PORT=80
