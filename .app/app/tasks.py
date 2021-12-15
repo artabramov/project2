@@ -4,8 +4,10 @@ celery = make_celery()
 
 @celery.task(value='web.post')
 def task_post(msg):
-    import time
-    time.sleep(30)
+    from app import db, Tmp
+    tmp = Tmp(name=msg)
+    db.session.add(tmp)
+    db.session.commit()
     return None
 
 
