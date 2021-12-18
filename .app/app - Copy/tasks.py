@@ -1,13 +1,14 @@
+#from . import db, make_celery
+#from .models import tmp
 from app import make_celery
 
 celery = make_celery()
 
 @celery.task(value='web.post')
 def task_post(msg):
-    from app import db, Tmp
-    tmp = Tmp(name=msg)
-    db.session.add(tmp)
-    db.session.commit()
+    #tempo = tmp.Tmp(name=msg)
+    #db.session.add(tmp)
+    #db.session.commit()
     return None
 
 
