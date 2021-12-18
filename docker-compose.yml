@@ -18,9 +18,10 @@ services:
     ports:
     - "8082:80"
 
-  rabbit:
+  rabbit-1:
     image: rabbitmq:3-management
-    container_name: rabbit
+    hostname: rabbit-1
+    container_name: rabbit-1
     restart: always
     environment:
       RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
@@ -30,6 +31,20 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+
+  rabbit-2:
+    image: rabbitmq:3-management
+    hostname: rabbit-2
+    container_name: rabbit-2
+    restart: always
+    environment:
+      RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST: /
+    ports:
+      - "15673:15672"
+      - "5673:5672"
 
   postgres-1:
     image: postgres:13.3

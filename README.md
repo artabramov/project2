@@ -16,7 +16,13 @@ docker stop app-1 && docker rm app-1 && docker stop app-2 && docker rm app-2 && 
 
 
 docker-compose stop app-1 && docker rm app-1 && docker rmi app && docker build -t app ./.app/ && docker-compose up -d
+
 docker exec -it app-1 bash  
 source ./venv/bin/activate  
 celery -A app.tasks.post_msg worker -n post_worker.%n -Q post
+
+docker exec -it rabbit-2 bash  
+rabbitmqctl stop_app
+rabbitmqctl join_cluster rabbit@rabbit-1
+rabbitmqctl start_app
 
