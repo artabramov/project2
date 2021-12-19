@@ -36,7 +36,9 @@ services:
     image: rabbitmq:3-management
     hostname: rabbit-2
     container_name: rabbit-2
-    restart: always
+    restart: unless-stopped
+    depends_on:
+      - rabbit-1
     environment:
       RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
       RABBITMQ_DEFAULT_USER: guest
